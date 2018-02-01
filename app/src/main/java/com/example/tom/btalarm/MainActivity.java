@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<String> deviceNames;
 
     Button buttonDeviceList;
+    Button buttonSoundConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,24 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        buttonSoundConfig = (Button) findViewById(R.id.d_bSoundList);
+        buttonSoundConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    SoundConfigFragment listFrag = new SoundConfigFragment();
+                    ft.replace(R.id.d_listFragment, listFrag);
+                    ft.commit();
+                } catch (Exception e) {
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Starting the fragment", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
         myBluetooth = BluetoothAdapter.getDefaultAdapter();
         deviceMap = new HashMap<>();
